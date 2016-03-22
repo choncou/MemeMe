@@ -36,35 +36,62 @@
                                     <barButtonItem width="98" style="plain" systemItem="fixedSpace" id="PrU-cP-kDS"/>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CbI-ox-XR3">
-                                <rect key="frame" x="52" y="129" width="270" height="410"/>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D3j-WA-K5S">
-                                <rect key="frame" x="20" y="83" width="335" height="38"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                            </textField>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Voi-JT-xe1">
-                                <rect key="frame" x="-8" y="0.0" width="391" height="44"/>
+                                <rect key="frame" x="-8" y="20" width="391" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="xLL-jP-kin"/>
+                                    <navigationItem title="Create Meme" id="xLL-jP-kin">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="1uD-Ae-Y3s">
+                                            <connections>
+                                                <action selector="shareMeme:" destination="BYZ-38-t0r" id="aGJ-l7-Nuf"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j11-CF-4NB">
-                                <rect key="frame" x="16" y="547" width="343" height="38"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                            </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Htu-Re-yMQ">
+                                <rect key="frame" x="16" y="76" width="343" height="527"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CbI-ox-XR3">
+                                        <rect key="frame" x="-5" y="0.0" width="343" height="527"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ugF-gd-Sxc">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="38"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j11-CF-4NB">
+                                        <rect key="frame" x="0.0" y="489" width="343" height="38"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="CbI-ox-XR3" secondAttribute="trailing" constant="5" id="4w3-3X-kC3"/>
+                                    <constraint firstItem="ugF-gd-Sxc" firstAttribute="leading" secondItem="Htu-Re-yMQ" secondAttribute="leading" id="8SG-ee-tCg"/>
+                                    <constraint firstItem="ugF-gd-Sxc" firstAttribute="top" secondItem="Htu-Re-yMQ" secondAttribute="top" id="FDJ-Pi-033"/>
+                                    <constraint firstAttribute="trailing" secondItem="j11-CF-4NB" secondAttribute="trailing" id="I3B-o8-EM4"/>
+                                    <constraint firstAttribute="trailing" secondItem="ugF-gd-Sxc" secondAttribute="trailing" id="Ly5-Bt-b7W"/>
+                                    <constraint firstItem="j11-CF-4NB" firstAttribute="leading" secondItem="Htu-Re-yMQ" secondAttribute="leading" id="Q0C-y6-KNg"/>
+                                    <constraint firstItem="CbI-ox-XR3" firstAttribute="top" secondItem="Htu-Re-yMQ" secondAttribute="top" id="Yww-k9-mT7"/>
+                                    <constraint firstItem="CbI-ox-XR3" firstAttribute="leading" secondItem="Htu-Re-yMQ" secondAttribute="leading" constant="-5" id="qMY-Pw-mYV"/>
+                                    <constraint firstAttribute="bottom" secondItem="j11-CF-4NB" secondAttribute="bottom" id="sPA-xc-cQX"/>
+                                    <constraint firstAttribute="bottom" secondItem="CbI-ox-XR3" secondAttribute="bottom" id="srz-xb-f6A"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Voi-JT-xe1" secondAttribute="trailing" constant="-24" id="EBP-LS-nAN"/>
+                            <constraint firstItem="Voi-JT-xe1" firstAttribute="centerX" secondItem="O7K-ST-gLS" secondAttribute="centerX" id="5u6-4F-tt8"/>
+                            <constraint firstItem="Htu-Re-yMQ" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Bku-ZF-mI2"/>
+                            <constraint firstItem="Htu-Re-yMQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="GHr-PR-MgK"/>
+                            <constraint firstItem="Voi-JT-xe1" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="H3I-fV-fJr"/>
+                            <constraint firstItem="Voi-JT-xe1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-24" id="TC9-B9-FUk"/>
+                            <constraint firstItem="O7K-ST-gLS" firstAttribute="top" secondItem="Htu-Re-yMQ" secondAttribute="bottom" constant="20" id="Z8m-cw-ptV"/>
                             <constraint firstItem="O7K-ST-gLS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="aGN-wp-8VU"/>
-                            <constraint firstItem="Voi-JT-xe1" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="bYe-yv-tWP"/>
                             <constraint firstItem="O7K-ST-gLS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cR2-08-cDy"/>
-                            <constraint firstItem="Voi-JT-xe1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pQl-2S-JSL"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="O7K-ST-gLS" secondAttribute="bottom" id="vIU-xY-2jT"/>
-                            <constraint firstItem="Voi-JT-xe1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-24" id="wX0-TO-SyJ"/>
+                            <constraint firstItem="Htu-Re-yMQ" firstAttribute="top" secondItem="Voi-JT-xe1" secondAttribute="bottom" constant="12" id="xWg-nj-QLS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="O7K-ST-gLS" secondAttribute="trailing" constant="-20" id="yI1-Kq-A9I"/>
                         </constraints>
                     </view>
@@ -73,7 +100,9 @@
                         <outlet property="bottomTextField" destination="j11-CF-4NB" id="79X-ow-oBW"/>
                         <outlet property="cameraButton" destination="ux1-uX-EKb" id="dfs-bh-edc"/>
                         <outlet property="memeImage" destination="CbI-ox-XR3" id="H5M-nV-HOD"/>
-                        <outlet property="topTextField" destination="D3j-WA-K5S" id="p29-ub-yy4"/>
+                        <outlet property="memeView" destination="Htu-Re-yMQ" id="Y2Z-Yz-rtH"/>
+                        <outlet property="shareButton" destination="1uD-Ae-Y3s" id="IVs-In-fbm"/>
+                        <outlet property="topTextField" destination="ugF-gd-Sxc" id="HB3-6u-98c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

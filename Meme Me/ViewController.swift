@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var memeView: UIView!
     @IBOutlet weak var memeImage: UIImageView!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
@@ -29,9 +31,33 @@ class ViewController: UIViewController {
         presentViewController(imagePicker, animated: true, completion: nil)
     }
     
+    @IBAction func shareMeme(sender: UIBarButtonItem) {
+        let meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, originalImage: memeImage.image, memedImage: generateMemedImage())
+        
+        let activityController = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
+        
+        presentViewController(activityController, animated: true){
+//            dismissViewControllerAnimated(true, completion: nil)
+            print("done")
+        }
+        
+    }
     
+    func generateMemedImage() -> UIImage{
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        memeView.drawViewHierarchyInRect(memeView.frame, afterScreenUpdates: true)
+        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return memedImage
+    }
+    
+    //MARK: Lifecycle
     override func viewWillAppear(animated: Bool) {
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         subscribeToKeyboardNotification()
     }
     
@@ -40,13 +66,14 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        shareButton.enabled = false
         topTextField.delegate = self
         bottomTextField.delegate = self
         let memeTextAttributes = [
-            NSStrokeColorAttributeName : UIColor.blackColor(),
             NSForegroundColorAttributeName : UIColor.whiteColor(),
             NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName : 3.0
+            NSStrokeColorAttributeName : UIColor.blackColor(),
+            NSStrokeWidthAttributeName : -3.0
         ]
         
         topTextField.defaultTextAttributes = memeTextAttributes
@@ -55,6 +82,7 @@ class ViewController: UIViewController {
         bottomTextField.textAlignment = .Center
     }
     
+    //MARK: Notifcations
     func keyboardWillShow(notification: NSNotification){
         self.view.frame.origin.y -= getKeyboardHeight(notification)
     }
@@ -88,10 +116,12 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else{
+            shareButton.enabled = false
             return
         }
         memeImage.image = image
         dismissViewControllerAnimated(true, completion: nil)
+        shareButton.enabled = true
     }
     
 }
