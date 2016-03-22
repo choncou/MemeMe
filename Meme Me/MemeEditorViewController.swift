@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MemeEditorViewController: UIViewController {
     
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var memeView: UIView!
@@ -18,17 +18,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
     @IBAction func pickImageFromLibrary(sender: AnyObject) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        presentViewController(imagePicker, animated: true, completion: nil)
+        pickImageFromSource(UIImagePickerControllerSourceType.PhotoLibrary)
     }
     
     @IBAction func pickImageFromCamera(sender: AnyObject) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-        presentViewController(imagePicker, animated: true, completion: nil)
+        pickImageFromSource(UIImagePickerControllerSourceType.Camera)
     }
     
     @IBAction func shareMeme(sender: UIBarButtonItem) {
@@ -36,11 +30,14 @@ class ViewController: UIViewController {
         
         let activityController = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
         
-        presentViewController(activityController, animated: true){
-//            dismissViewControllerAnimated(true, completion: nil)
-            print("done")
-        }
-        
+        presentViewController(activityController, animated: true, completion: nil)
+    }
+    
+    func pickImageFromSource(source: UIImagePickerControllerSourceType){
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = source
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     func generateMemedImage() -> UIImage{
@@ -84,11 +81,13 @@ class ViewController: UIViewController {
     
     //MARK: Notifcations
     func keyboardWillShow(notification: NSNotification){
-        self.view.frame.origin.y -= getKeyboardHeight(notification)
+        if bottomTextField.isFirstResponder(){
+            self.view.frame.origin.y = getKeyboardHeight(notification) * -1
+        }
     }
     
     func keyboardWillHide(notification: NSNotification){
-        self.view.frame.origin.y += getKeyboardHeight(notification)
+        self.view.frame.origin.y = 0
     }
     
     func getKeyboardHeight(notifcation: NSNotification) -> CGFloat{
@@ -98,9 +97,9 @@ class ViewController: UIViewController {
     }
     
     func subscribeToKeyboardNotification(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func unsubscribeFromKeyboardNotification(){
@@ -112,7 +111,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else{
@@ -126,7 +125,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     
 }
 
-extension ViewController: UITextFieldDelegate{
+extension MemeEditorViewController: UITextFieldDelegate{
     func textFieldDidBeginEditing(textField: UITextField) {
         if textField.text == "TOP" || textField.text == "BOTTOM"{
             textField.text?.removeAll()
