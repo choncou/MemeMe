@@ -111,6 +111,7 @@ class MemeEditorViewController: UIViewController {
     
 }
 
+//MARK: Extensions
 extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
