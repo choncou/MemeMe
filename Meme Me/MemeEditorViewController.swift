@@ -97,9 +97,9 @@ class MemeEditorViewController: UIViewController {
     }
     
     func subscribeToKeyboardNotification(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func unsubscribeFromKeyboardNotification(){
@@ -111,6 +111,7 @@ class MemeEditorViewController: UIViewController {
     
 }
 
+//MARK: Extensions
 extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
