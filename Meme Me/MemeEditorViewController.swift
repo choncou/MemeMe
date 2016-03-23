@@ -17,6 +17,8 @@ class MemeEditorViewController: UIViewController {
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
+//MARK: IBAction
+    
     @IBAction func pickImageFromLibrary(sender: AnyObject) {
         pickImageFromSource(UIImagePickerControllerSourceType.PhotoLibrary)
     }
@@ -28,9 +30,15 @@ class MemeEditorViewController: UIViewController {
     @IBAction func shareMeme(sender: UIBarButtonItem) {
         let meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, originalImage: memeImage.image, memedImage: generateMemedImage())
         
+        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        
         let activityController = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
         
         presentViewController(activityController, animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelEditing(sender: UIBarButtonItem){
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func pickImageFromSource(source: UIImagePickerControllerSourceType){
@@ -49,7 +57,18 @@ class MemeEditorViewController: UIViewController {
         return memedImage
     }
     
-    //MARK: Lifecycle
+    func addMemeTextAttrib(textView: UITextField){
+        let memeTextAttributes = [
+            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeColorAttributeName : UIColor.blackColor(),
+            NSStrokeWidthAttributeName : -3.0
+        ]
+        
+        textView.defaultTextAttributes = memeTextAttributes
+    }
+    
+//MARK: Lifecycle
     override func viewWillAppear(animated: Bool) {
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
     }
@@ -66,20 +85,17 @@ class MemeEditorViewController: UIViewController {
         shareButton.enabled = false
         topTextField.delegate = self
         bottomTextField.delegate = self
-        let memeTextAttributes = [
-            NSForegroundColorAttributeName : UIColor.whiteColor(),
-            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeColorAttributeName : UIColor.blackColor(),
-            NSStrokeWidthAttributeName : -3.0
-        ]
-        
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
+        addMemeTextAttrib(topTextField)
+        addMemeTextAttrib(bottomTextField)
         topTextField.textAlignment = .Center
         bottomTextField.textAlignment = .Center
     }
     
-    //MARK: Notifcations
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+//MARK: Notifcations
     func keyboardWillShow(notification: NSNotification){
         if bottomTextField.isFirstResponder(){
             self.view.frame.origin.y = getKeyboardHeight(notification) * -1

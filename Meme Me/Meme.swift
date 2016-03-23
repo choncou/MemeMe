@@ -13,5 +13,5 @@ struct  Meme{
     var topText: String? = nil
     var bottomText: String? = nil
     var originalImage: UIImage? = nil
-    let memedImage: UIImage
+    var memedImage: UIImage
 }
