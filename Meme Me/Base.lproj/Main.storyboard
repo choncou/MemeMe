@@ -148,7 +148,6 @@
         <!--Table Navigation Controller-->
         <scene sceneID="xiT-Id-yb6">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aJK-ka-N8M" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="Table Navigation Controller" id="Czo-2V-1qi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="tableIcon" id="rq0-F2-a3g"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HMg-4W-Mtu">
@@ -159,6 +158,7 @@
                         <segue destination="Twt-aP-yUK" kind="relationship" relationship="rootViewController" id="8G6-pY-sb2"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aJK-ka-N8M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1203" y="155"/>
         </scene>
@@ -305,7 +305,6 @@
         <!--Collection Navigation Controller-->
         <scene sceneID="leK-rv-ADR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oat-eA-bYV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="Collection Navigation Controller" id="jg3-7q-nEK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="collectionIcon" id="XrU-y2-QpP"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="snl-FJ-7xZ">
@@ -316,6 +315,7 @@
                         <segue destination="SVc-Za-eJQ" kind="relationship" relationship="rootViewController" id="Wek-t0-LZe"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oat-eA-bYV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1203" y="824"/>
         </scene>
