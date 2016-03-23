@@ -28,6 +28,8 @@ class MemeEditorViewController: UIViewController {
     @IBAction func shareMeme(sender: UIBarButtonItem) {
         let meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, originalImage: memeImage.image, memedImage: generateMemedImage())
         
+        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        
         let activityController = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
         
         presentViewController(activityController, animated: true, completion: nil)
