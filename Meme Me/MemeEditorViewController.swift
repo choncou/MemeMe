@@ -17,6 +17,7 @@ class MemeEditorViewController: UIViewController {
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
+    
 //MARK: IBAction
     
     @IBAction func pickImageFromLibrary(sender: AnyObject) {
@@ -30,15 +31,26 @@ class MemeEditorViewController: UIViewController {
     @IBAction func shareMeme(sender: UIBarButtonItem) {
         let meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, originalImage: memeImage.image, memedImage: generateMemedImage())
         
-        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
         
         let activityController = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
+        
+        activityController.completionWithItemsHandler = { handler in
+            // handler is made up of: (String?, Bool, [AnyObject]?, NSError?)
+            if handler.1{
+                (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+                self.closeEditor()
+            }
+        }
         
         presentViewController(activityController, animated: true, completion: nil)
     }
     
     @IBAction func cancelEditing(sender: UIBarButtonItem){
-        self.dismissViewControllerAnimated(true, completion: nil)
+        closeEditor()
+    }
+    
+    func closeEditor(){
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func pickImageFromSource(source: UIImagePickerControllerSourceType){
@@ -138,6 +150,8 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigatio
         memeImage.image = image
         dismissViewControllerAnimated(true, completion: nil)
         shareButton.enabled = true
+        
+        //TODO: Adjust so textfields do not overlap only part of portrait image
     }
     
 }
