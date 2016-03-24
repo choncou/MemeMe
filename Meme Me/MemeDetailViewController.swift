@@ -20,7 +20,8 @@ class MemeDetailViewController: UIViewController {
             return
         }
         memeImage.image = sentMeme
-        // Do any additional setup after loading the view.
+
+        memeImage.contentMode = .ScaleAspectFit
     }
 
 }
